@@ -10,15 +10,8 @@
                     <el-button type="primary" @click="search()">搜索</el-button>
                 </el-col> 
             </el-row>
-            <el-row class="row">
-                <ul class="play-list">
-                    <li v-for="player in players">
-                        <div class="img"><img :src="player.player_image"></div>
-                        <div class="cname">{{player.player_name}}</div>
-                        <div class="ename">{{player.full_name}}</div>
-                    </li>
-                </ul>
-            </el-row>
+            
+
         </div>
 		
   	</div>
@@ -32,34 +25,15 @@
     		return {
     			info:{
     				name:''
-    			},
-                players: []
+    			}
     		}
     	},
         methods:{
             search(){
 
             	this.$http.post('http://localhost/players/index.php?g=Demo&m=Index&a=query',qs.stringify(this.info)).then((res) => {
-            		console.log(res.data);
-                    this.players = res.data;
+            		console.log(res);
             	})
-            	/*this.$http.post('http://localhost/players/login',this.loginForm).then((res) => {
-
-			    	if(res.data.success){
-
-			    		this.$message({
-			    			type: 'success',
-			    			message: '登录成功'
-			    		});
-			    		
-			    		this.$router.push('manage');
-			    	}else{
-			    		this.$message({
-			    			type: 'error',
-			    			message: res.data.msg
-			    		})
-			    	}
-			    });*/
             }
         },
     	components:{
