@@ -1,25 +1,15 @@
 <template>
-	<div>
-		<head-top></head-top>
-        <div class="box">
-            <el-row class="row">
-                <el-col :span="20">
-                    <el-input v-model="info.name" placeholder="球员姓名"></el-input>
-                </el-col>
-                <el-col :span="4">
-                    <el-button type="primary" @click="search()">搜索</el-button>
-                </el-col> 
-            </el-row>
-            <el-row class="row">
-                <ul class="play-list">
-                    <li v-for="player in players">
-                        <div class="img"><img :src="player.player_image"></div>
-                        <div class="cname">{{player.player_name}}</div>
-                        <div class="ename">{{player.full_name}}</div>
-                    </li>
-                </ul>
-            </el-row>
-        </div>
+	<div class="box">
+		<head-top v-on:listenToChildEvent="showMsgFromChild"></head-top>
+        <el-row class="row">
+            <ul class="play-list">
+                <li v-for="player in players" @click="goDetail(player.player_id)">
+                    <div class="img"><img :src="player.player_image"></div>
+                    <div class="cname">{{player.player_name}}</div>
+                    <div class="ename">{{player.full_name}}</div>
+                </li>
+            </ul>
+        </el-row>
 		
   	</div>
 </template>
@@ -30,36 +20,24 @@
     export default {
     	data(){
     		return {
-    			info:{
-    				name:''
-    			},
+                info:{
+                    name:''
+                },
                 players: []
     		}
     	},
         methods:{
-            search(){
-
-            	this.$http.post('http://localhost/players/index.php?g=Demo&m=Index&a=query',qs.stringify(this.info)).then((res) => {
-            		console.log(res.data);
+            // 监听子组件的事件并获取数据
+            showMsgFromChild:function(data){
+                this.info.name = data;
+                this.$http.post('http://localhost/players/index.php?g=Demo&m=Index&a=query',qs.stringify(this.info)).then((res) => {
+                    console.log(res.data);
                     this.players = res.data;
-            	})
-            	/*this.$http.post('http://localhost/players/login',this.loginForm).then((res) => {
-
-			    	if(res.data.success){
-
-			    		this.$message({
-			    			type: 'success',
-			    			message: '登录成功'
-			    		});
-			    		
-			    		this.$router.push('manage');
-			    	}else{
-			    		this.$message({
-			    			type: 'error',
-			    			message: res.data.msg
-			    		})
-			    	}
-			    });*/
+                })
+            },
+            // 去详情页面
+            goDetail:function(player_id){
+                this.$router.push({path: '/Detail?id=' + player_id})
             }
         },
     	components:{
@@ -70,15 +48,39 @@
 
 
 <style lang="less" scoped>
+    @import '../style/common';
 	@import '../style/mixin';
     .box{
-    	padding:5px;
+    	padding-top:60px;
         .row{
             margin-bottom:15px;
             
         }
         .form-item{
             display:inline-block;
+        }
+        .play-list{
+            display:flex;
+            flex-direction:row;
+            flex-wrap:wrap;
+            li{
+                width:50%;
+                padding:10px;
+                box-sizing:border-box;
+                .img{
+                    img{max-width:100%; height:80px;}
+                }
+                .cname{
+                    height:37/@r;
+                    font-size:37/@r;
+                    margin:5px 0;
+                }
+                .ename{
+                    height:80/@r;
+                    line-height:40/@r;
+                    font-size:38/@r;
+                }
+            }
         }
     }
 </style>

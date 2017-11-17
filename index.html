@@ -3,7 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>qudao</title>
+    <title>player</title>
+    <script>
+      var html = document.documentElement;
+      var hWidth = html.getBoundingClientRect().width;
+      html.style.fontSize = hWidth/15 + "px";
+    </script>
   </head>
   <body>
     <div id="app" class="fill_container"></div>
