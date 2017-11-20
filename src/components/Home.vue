@@ -41,7 +41,7 @@
             }
         },
     	components:{
-    		headTop
+    		headTop 
     	}
     }
 </script>
