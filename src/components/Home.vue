@@ -16,6 +16,7 @@
 
 <script>
 	import qs from 'qs'
+    import {apiUrl} from '../config/env'
 	import headTop from './headTop'
     export default {
     	data(){
@@ -30,7 +31,7 @@
             // 监听子组件的事件并获取数据
             showMsgFromChild:function(data){
                 this.info.name = data;
-                this.$http.post('http://localhost/players/index.php?g=Demo&m=Index&a=query',qs.stringify(this.info)).then((res) => {
+                this.$http.post(apiUrl+'/players/index.php?g=Demo&m=Index&a=query',qs.stringify(this.info)).then((res) => {
                     console.log(res.data);
                     this.players = res.data;
                 })
