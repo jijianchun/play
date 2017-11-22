@@ -1,5 +1,6 @@
 <template>
 	<div class="box">
+		<head-top2></head-top2>
 		<dl>
 			<dt>球员姓名</dt>
 			<dd>{{player.player_name}}</dd>
@@ -14,11 +15,11 @@
 		</dl>
 		<dl>
 			<dt>球员身高</dt>
-			<dd>{{player.player_height}}</dd>
+			<dd>{{player.player_height}}公分</dd>
 		</dl>
 		<dl>
 			<dt>球员体重</dt>
-			<dd>{{player.player_weight}}</dd>
+			<dd>{{player.player_weight}}公斤</dd>
 		</dl>
 		<dl>
 			<dt>球员位置</dt>
@@ -46,7 +47,7 @@
 		</dl>
 		<dl>
 			<dt>当前年薪</dt>
-			<dd>{{player.player_salary}}</dd>
+			<dd>{{player.player_salary}}万美元</dd>
 		</dl>
 
         
@@ -55,7 +56,8 @@
 
 <script>
 	import qs from 'qs'
-	import headTop from './headTop'
+	import {apiUrl} from '../config/env'
+	import headTop2 from './head2Top'
     export default {
     	data(){
     		return {
@@ -69,14 +71,13 @@
         methods:{
             fetchData(){
             	// console.log(this.$route.query.id);
-            	this.$http.get('http://localhost/players/index.php?g=Demo&m=Index&a=findById&id='+this.$route.query.id).then((res) => {
+            	this.$http.get(apiUrl+'/players/index.php?g=Demo&m=Index&a=findById&id='+this.$route.query.id).then((res) => {
             		this.player = res.data;
-                    //console.log(res.data);
                 })
             }
         },
     	components:{
-    		headTop
+    		headTop2
     	}
     }
 </script>

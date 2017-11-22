@@ -72,14 +72,14 @@
                     img{max-width:100%; height:80px;}
                 }
                 .cname{
-                    height:37/@r;
-                    font-size:37/@r;
+                    height:20/@r;
+                    font-size:20/@r;
                     margin:5px 0;
                 }
                 .ename{
                     height:80/@r;
                     line-height:40/@r;
-                    font-size:38/@r;
+                    font-size:20/@r;
                 }
             }
         }
