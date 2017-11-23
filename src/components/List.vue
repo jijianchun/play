@@ -1,9 +1,7 @@
 <template>
 	<div class="box">
-		<head-top v-on:listenToChildEvent="showMsgFromChild"></head-top>
-
+		<head-top2></head-top2>
         <el-row class="row">
-            <h1 class="title">热门球员</h1>
             <ul class="play-list">
                 <li v-for="player in players" @click="goDetail(player.player_id)">
                     <div class="img"><img :src="player.player_image"></div>
@@ -19,7 +17,7 @@
 <script>
 	import qs from 'qs'
     import {apiUrl} from '../config/env'
-	import headTop from './headTop'
+	import headTop2 from './head2Top'
     export default {
     	data(){
     		return {
@@ -29,22 +27,32 @@
                 players: []
     		}
     	},
+        created(){
+            this.fetchData();
+        },
         methods:{
-            // 监听子组件的事件并获取数据
-            showMsgFromChild:function(data){
-                this.info.name = data;
+            fetchData:function(){
+                this.info.name = this.$route.query.name;
                 this.$http.post(apiUrl+'/players/index.php?g=Demo&m=Index&a=query',qs.stringify(this.info)).then((res) => {
                     console.log(res.data);
                     this.players = res.data;
                 })
             },
+            // 监听子组件的事件并获取数据
+            /*showMsgFromChild:function(data){
+                this.info.name = data;
+                this.$http.post(apiUrl+'/players/index.php?g=Demo&m=Index&a=query',qs.stringify(this.info)).then((res) => {
+                    console.log(res.data);
+                    this.players = res.data;
+                })
+            },*/
             // 去详情页面
             goDetail:function(player_id){
                 this.$router.push({path: '/Detail?id=' + player_id})
             }
         },
     	components:{
-    		headTop 
+    		headTop2 
     	}
     }
 </script>
@@ -57,13 +65,10 @@
     	padding-top:60px;
         .row{
             margin-bottom:15px;
-            .title{
-                height:50/@r;
-                line-height:50/@r;
-                padding-left:20/@r;
-                text-align:left;
-                font-size:30/@r;
-            }
+            
+        }
+        .form-item{
+            display:inline-block;
         }
         .play-list{
             display:flex;

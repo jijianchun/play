@@ -66,7 +66,6 @@
     	},
     	created(){
     		this.fetchData();
-    		
     	},
         methods:{
             fetchData(){

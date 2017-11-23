@@ -2,7 +2,7 @@
     <div class="header_container">
 
 		<div class="back">
-			<i class="el-icon-arrow-left"></i>
+			<!-- <i class="el-icon-arrow-left"></i> -->
 		</div>
 		<div class="search-box">
 			<el-input v-model="info.name" placeholder="球员姓名"></el-input>
@@ -30,8 +30,9 @@ export default {
 	},
 	methods: {
 		search(){
+			this.$router.push({path: '/List?name=' + this.info.name});
 			// 传递搜索名称给父组件
-			this.$emit("listenToChildEvent",this.info.name);
+			// this.$emit("listenToChildEvent",this.info.name);
 		}
 	}
 }
