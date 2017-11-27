@@ -70,8 +70,13 @@
         methods:{
             fetchData(){
             	// console.log(this.$route.query.id);
+            	// 获取球员详细数据
             	this.$http.get(apiUrl+'/players/index.php?g=Demo&m=Index&a=findById&id='+this.$route.query.id).then((res) => {
             		this.player = res.data;
+                });
+                // 增加球员打浏览量
+                this.$http.get(apiUrl+'/players/index.php?g=Demo&m=Index&a=addPageView&id='+this.$route.query.id).then((res) => {
+                	console.log(res);
                 })
             }
         },

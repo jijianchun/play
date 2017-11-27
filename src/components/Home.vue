@@ -3,9 +3,9 @@
 		<head-top v-on:listenToChildEvent="showMsgFromChild"></head-top>
 
         <el-row class="row">
-            <h1 class="title">热门球员</h1>
+            <h1 class="title">新增球员</h1>
             <ul class="play-list">
-                <li v-for="player in players" @click="goDetail(player.player_id)">
+                <li v-for="player in newPlayers" @click="goDetail(player.player_id)">
                     <div class="img"><img :src="player.player_image"></div>
                     <div class="cname">{{player.player_name}}</div>
                     <div class="ename">{{player.full_name}}</div>
@@ -26,21 +26,30 @@
                 info:{
                     name:''
                 },
-                players: []
+                players: [],
+                newPlayers: []
     		}
     	},
+        created(){
+            this.initdata();
+        },
         methods:{
             // 监听子组件的事件并获取数据
             showMsgFromChild:function(data){
                 this.info.name = data;
                 this.$http.post(apiUrl+'/players/index.php?g=Demo&m=Index&a=query',qs.stringify(this.info)).then((res) => {
-                    console.log(res.data);
                     this.players = res.data;
                 })
             },
             // 去详情页面
             goDetail:function(player_id){
                 this.$router.push({path: '/Detail?id=' + player_id})
+            },
+            initdata:function(){
+                // 最新增加球员
+                this.$http.get(apiUrl+'/players/index.php?g=Demo&m=Index&a=getNewPlayer').then((res) => {
+                    this.newPlayers = res.data;
+                })
             }
         },
     	components:{
@@ -58,11 +67,10 @@
         .row{
             margin-bottom:15px;
             .title{
-                height:50/@r;
-                line-height:50/@r;
-                padding-left:20/@r;
-                text-align:left;
-                font-size:30/@r;
+                height:70/@r;
+                line-height:70/@r;
+                text-align:center;
+                font-size:25/@r;
             }
         }
         .play-list{
