@@ -5,10 +5,10 @@
 			<!-- <i class="el-icon-arrow-left"></i> -->
 		</div>
 		<div class="search-box">
-			<el-input v-model="info.name" placeholder="球员姓名"></el-input>
+			<el-input size="mini" v-model="info.name" placeholder="球员姓名"></el-input>
 		</div>
 		<div class="search-btn">
-			<el-button type="primary" icon="el-icon-search" @click="search">搜索</el-button>
+			<el-button type="primary" size="mini" icon="el-icon-search" @click="search">搜索</el-button>
 		</div>
 
     </div>
@@ -43,13 +43,14 @@ export default {
 	@import '../style/mixin';
 	.header_container{
 		background-color: #EFF2F7;
-		height: 60px;
+		height: 40px;
 		display: flex;
 		align-items: center;
 		position:fixed;
 		top:0;
 		left:0;
 		width:100%;
+		z-index:10;
 		.back{
 			width:70/@r;
 		}

@@ -1,56 +1,56 @@
 <template>
 	<div class="box">
-		<head-top2></head-top2>
-		<dl>
-			<dt>球员姓名</dt>
-			<dd>{{player.player_name}}</dd>
-		</dl>
-		<dl>
-			<dt>球员头像</dt>
-			<dd><img :src="player.player_image"></dd>
-		</dl>
-		<dl>
-			<dt>球员英文全称</dt>
-			<dd>{{player.full_name}}</dd>
-		</dl>
-		<dl>
-			<dt>球员身高</dt>
-			<dd>{{player.player_height}}公分</dd>
-		</dl>
-		<dl>
-			<dt>球员体重</dt>
-			<dd>{{player.player_weight}}公斤</dd>
-		</dl>
-		<dl>
-			<dt>球员位置</dt>
-			<dd>{{player.player_place}}</dd>
-		</dl>
-		<dl>
-			<dt>球员生日</dt>
-			<dd>{{player.player_brithday}}</dd>
-		</dl>
-		<dl>
-			<dt>出生城市</dt>
-			<dd>{{player.player_city}}</dd>
-		</dl>
-		<dl>
-			<dt>毕业学校</dt>
-			<dd>{{player.player_college}}</dd>
-		</dl>
-		<dl>
-			<dt>球衣号码</dt>
-			<dd>{{player.player_number}}</dd>
-		</dl>
-		<dl>
-			<dt>选秀情况</dt>
-			<dd>{{player.player_draft}}</dd>
-		</dl>
-		<dl>
-			<dt>当前年薪</dt>
-			<dd>{{player.player_salary}}万美元</dd>
-		</dl>
-
-        
+		<head-top2 type="detail"></head-top2>
+		<div class="detail">
+			<dl>
+				<dt>球员姓名</dt>
+				<dd>{{player.player_name}}</dd>
+			</dl>
+			<dl>
+				<dt>球员头像</dt>
+				<dd><img :src="player.player_image"></dd>
+			</dl>
+			<dl>
+				<dt>球员英文全称</dt>
+				<dd>{{player.full_name}}</dd>
+			</dl>
+			<dl>
+				<dt>球员身高</dt>
+				<dd>{{player.player_height}}公分</dd>
+			</dl>
+			<dl>
+				<dt>球员体重</dt>
+				<dd>{{player.player_weight}}公斤</dd>
+			</dl>
+			<dl>
+				<dt>球员位置</dt>
+				<dd>{{player.player_place}}</dd>
+			</dl>
+			<dl>
+				<dt>球员生日</dt>
+				<dd>{{player.player_brithday}}</dd>
+			</dl>
+			<dl>
+				<dt>出生城市</dt>
+				<dd>{{player.player_city}}</dd>
+			</dl>
+			<dl>
+				<dt>毕业学校</dt>
+				<dd>{{player.player_college}}</dd>
+			</dl>
+			<dl>
+				<dt>球衣号码</dt>
+				<dd>{{player.player_number}}</dd>
+			</dl>
+			<dl>
+				<dt>选秀情况</dt>
+				<dd>{{player.player_draft}}</dd>
+			</dl>
+			<dl>
+				<dt>当前年薪</dt>
+				<dd>{{player.player_salary}}万美元</dd>
+			</dl>
+		</div>
   	</div>
 </template>
 
@@ -69,7 +69,6 @@
     	},
         methods:{
             fetchData(){
-            	// console.log(this.$route.query.id);
             	// 获取球员详细数据
             	this.$http.get(apiUrl+'/players/index.php?g=Demo&m=Index&a=findById&id='+this.$route.query.id).then((res) => {
             		this.player = res.data;
@@ -91,7 +90,7 @@
 	@import '../style/common';
 	@import '../style/mixin';
 	.box{
-		padding:10px;
+		padding:40px 10px 10px;
 		dl{
 			display:flex;
 			flex-direction:row;

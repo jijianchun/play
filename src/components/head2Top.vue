@@ -5,7 +5,8 @@
 			<i class="el-icon-arrow-left"></i>
 		</div>
 		<div class="search-box">
-			球员详情
+			<span v-if="type == 'detail'">球员详情</span>
+			<span v-if="type == 'list'">球员列表</span>
 		</div>
 		<div class="space">
 			
@@ -17,6 +18,7 @@
 <script>
 
 export default {
+	props: ['type'],
 	data() {
 		return {
 			
@@ -35,7 +37,7 @@ export default {
 	@import '../style/mixin';
 	.header_container{
 		background-color: #EFF2F7;
-		height: 60px;
+		height: 40px;
 		display: flex;
 		align-items: center;
 		position:fixed;

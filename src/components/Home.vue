@@ -12,6 +12,16 @@
                 </li>
             </ul>
         </el-row>
+        <el-row class="row">
+            <h1 class="title">热门球员</h1>
+            <ul class="play-list">
+                <li v-for="player in hotPlayers" @click="goDetail(player.player_id)">
+                    <div class="img"><img :src="player.player_image"></div>
+                    <div class="cname">{{player.player_name}}</div>
+                    <div class="ename">{{player.full_name}}</div>
+                </li>
+            </ul>
+        </el-row>
 		
   	</div>
 </template>
@@ -27,7 +37,8 @@
                     name:''
                 },
                 players: [],
-                newPlayers: []
+                newPlayers: [],
+                hotPlayers: []
     		}
     	},
         created(){
@@ -49,7 +60,11 @@
                 // 最新增加球员
                 this.$http.get(apiUrl+'/players/index.php?g=Demo&m=Index&a=getNewPlayer').then((res) => {
                     this.newPlayers = res.data;
-                })
+                });
+                // 热门球员
+                this.$http.get(apiUrl+'/players/index.php?g=Demo&m=Index&a=getHotPlayer').then((res) => {
+                    this.hotPlayers = res.data;
+                });
             }
         },
     	components:{
@@ -63,9 +78,8 @@
     @import '../style/common';
 	@import '../style/mixin';
     .box{
-    	padding-top:60px;
+    	padding-top:40px;
         .row{
-            margin-bottom:15px;
             .title{
                 height:70/@r;
                 line-height:70/@r;
@@ -90,7 +104,7 @@
                     margin:5px 0;
                 }
                 .ename{
-                    height:80/@r;
+                    height:40/@r;
                     line-height:40/@r;
                     font-size:20/@r;
                 }

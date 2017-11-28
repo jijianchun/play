@@ -1,6 +1,6 @@
 <template>
 	<div class="box">
-		<head-top2></head-top2>
+		<head-top2 type="list"></head-top2>
         <el-row class="row">
             <ul class="play-list">
                 <li v-for="player in players" @click="goDetail(player.player_id)">
